@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Local configuration and secrets
+.env
+*.secrets.*
+
+# Generated runtime data
+raw/captures/*
+raw/attachments/*
+data/embeddings/*
+data/graph.json
+
+# Source document is duplicated by problemstatement.md
+problemstatement.docx
+
+# Keep directory placeholders tracked
+!raw/captures/.gitkeep
+!raw/attachments/.gitkeep
+!data/embeddings/.gitkeep
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/
