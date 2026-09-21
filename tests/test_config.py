@@ -12,6 +12,6 @@ def test_settings_point_to_project_root() -> None:
 
 def test_settings_have_valid_defaults() -> None:
     settings.validate()
-    assert settings.similarity_threshold == 0.68
+    assert settings.similarity_threshold == 0.55
     assert settings.top_k == 5
     assert settings.embedding_model

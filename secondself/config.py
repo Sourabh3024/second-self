@@ -80,7 +80,7 @@ def load_settings() -> Settings:
         embedding_model=os.getenv(
             "EMBEDDING_MODEL", "sentence-transformers/all-MiniLM-L6-v2"
         ).strip(),
-        similarity_threshold=_float_from_env("SIMILARITY_THRESHOLD", 0.68),
+        similarity_threshold=_float_from_env("SIMILARITY_THRESHOLD", 0.55),
         top_k=_int_from_env("TOP_K", 5),
         llm_provider=os.getenv("LLM_PROVIDER", "groq").strip(),
         llm_model=os.getenv("LLM_MODEL", "llama-3.1-8b-instant").strip(),
