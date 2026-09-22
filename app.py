@@ -47,7 +47,15 @@ def render_graph_html(graph: dict) -> str:
     data_block = json.dumps({"nodes": nodes, "edges": edges}, ensure_ascii=False)
 
     template = """
-    <div id="network" style="width:100%;height:700px;border:1px solid #2d3740;border-radius:12px;background:rgba(16,20,23,0.9)"></div>
+    <div style="color-scheme:light;position:relative;width:100%;height:700px;border:1px solid #cbd5e1;border-radius:12px;background:#f8fafc !important;background:linear-gradient(180deg, #f8fafc 0%, #eef4f7 100%);box-shadow: inset 0 0 32px rgba(71,85,105,0.08);color:#1e293b;overflow:hidden;">
+      <div style="position:absolute;top:14px;left:50%;z-index:10;transform:translateX(-50%);display:flex;align-items:center;gap:10px;padding:8px 14px;border:1px solid #d7e0e5;border-radius:999px;background:rgba(255,255,255,0.94);box-shadow:0 3px 12px rgba(71,85,105,0.14);font:600 13px Georgia,serif;white-space:nowrap;">
+        <span style="color:#9a6b16;">📁 Projects</span>
+        <span style="color:#16745a;">◈ Areas</span>
+        <span style="color:#326aa8;">▣ Resources</span>
+        <span style="color:#7951a0;">▤ Archives</span>
+      </div>
+      <div id="network" style="width:100%;height:700px;background:#f8fafc !important;"></div>
+    </div>
     <script type="text/javascript" src="https://unpkg.com/vis-network@9.1.9/standalone/umd/vis-network.min.js"></script>
     <script type="text/javascript">
       const palette = {color_block};
@@ -65,14 +73,15 @@ def render_graph_html(graph: dict) -> str:
           content_preview: node.content_preview || '',
           color: {{
             background: color,
-            border: '#edf5f1',
-            highlight: {{ background: '#ffffff', border: color }},
-            hover: {{ background: '#ffffff', border: color }}
+            border: '#64748b',
+            highlight: {{ background: '#ffffff', border: '#334155' }},
+            hover: {{ background: '#ffffff', border: '#334155' }}
           }},
-          font: {{ color: '#101417', face: 'Georgia', size: 12 }},
+          font: {{ color: '#1e293b', face: 'Georgia', size: 13, strokeWidth: 1.8, strokeColor: '#f8fafc', vadjust: 2 }},
           shape: 'dot',
-          size: 20,
-          shadow: {{ enabled: true, color: 'rgba(0,0,0,0.35)', size: 12, x: 0, y: 4 }}
+          size: 22,
+          borderWidth: 2,
+          shadow: {{ enabled: true, color: 'rgba(71,85,105,0.25)', size: 12, x: 0, y: 4 }}
         }};
       }}));
 
@@ -80,9 +89,9 @@ def render_graph_html(graph: dict) -> str:
         return {{
           ...edge,
           arrows: {{ to: {{ enabled: false }} }},
-          color: {{ color: '#64726f', highlight: '#f2c879', hover: '#b6c9c1' }},
+          color: {{ color: '#94a3b8', highlight: '#9a6b16', hover: '#326aa8' }},
           smooth: {{ type: 'continuous' }},
-          width: Math.max(1.0, Number(edge.weight || 1.0))
+          width: Math.max(1.2, Number(edge.weight || 1.0))
         }};
       }}));
 
@@ -112,8 +121,9 @@ def render_graph_html(graph: dict) -> str:
           }},
           stabilization: {{ enabled: true, iterations: 200, updateInterval: 25 }}
         }},
-        nodes: {{ chosen: true }},
-        edges: {{ selectionWidth: 2 }}
+        nodes: {{ chosen: true, font: {{ color: '#1e293b' }} }},
+        edges: {{ selectionWidth: 2, hoverWidth: 2 }},
+        interaction: {{ tooltipDelay: 100 }}
       }});
 
       network.on('click', (event) => {{
